@@ -1,4 +1,5 @@
 import ProgressStepper from "../../components/ProgressStepper/ProgressStepper";
+import FormTemplate from "../../components/FormTemplate/FormTemplate"
 
 const DefenseRequestPage: React.FC = () => 
 {
@@ -6,8 +7,9 @@ const DefenseRequestPage: React.FC = () =>
         <div className="pageContainer">
             <div className="pageContent">
                 <ProgressStepper/>
+                <FormTemplate/>
             </div>
         </div>
     )
 }
-export default DefenseRequestPage;
+export default DefenseRequestPage; 

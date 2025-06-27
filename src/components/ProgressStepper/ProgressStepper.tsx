@@ -1,6 +1,8 @@
 import styles from "./ProgressStepper.module.css";
 
 const ProgressStepper: React.FC = () => {
+
+
     return (
         <div className={styles.stepperContainer}>
             <hr className={styles.line}/>
