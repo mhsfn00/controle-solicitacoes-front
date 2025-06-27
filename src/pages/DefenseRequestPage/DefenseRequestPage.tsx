@@ -1,8 +1,12 @@
+import ProgressStepper from "../../components/ProgressStepper/ProgressStepper";
+
 const DefenseRequestPage: React.FC = () => 
 {
     return (
         <div className="pageContainer">
-            <h1>Defense Request</h1>
+            <div className="pageContent">
+                <ProgressStepper/>
+            </div>
         </div>
     )
 }

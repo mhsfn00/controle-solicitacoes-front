@@ -12,4 +12,14 @@
     margin-left: 13vw;
     width: 87vw;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pageContent {
+    display: flex;
+    flex-direction: column;
+    height: 94vh;
+    width: 40%;
 }
