@@ -1,0 +1,15 @@
+@import '../styles/colors.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto;
+}
+
+.pageContainer {
+    background-color: var(--background-primary);
+    margin-left: 13vw;
+    width: 87vw;
+    height: 100vh;
+}
