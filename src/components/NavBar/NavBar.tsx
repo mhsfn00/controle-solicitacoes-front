@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import styles from './NavBar.module.css';
 
 const Navbar: React.FC = () => (
-  <nav>
-    <Link to="/">Início</Link> | 
+  <nav className={styles.navbarContainer}>
+    <Link to="/">Início</Link>
     <Link to="/defenseRequest">Solicitação de Defesa</Link>
   </nav>
 );
