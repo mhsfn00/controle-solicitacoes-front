@@ -5,7 +5,6 @@ const ProgressStepper: React.FC = () => {
 
     return (
         <div className={styles.stepperContainer}>
-            <hr className={styles.line}/>
             <div className={styles.step}>
                 <div className={styles.stepCircle}>1</div>
                 <p className={styles.stepText}>Step - Text</p>

@@ -16,23 +16,10 @@
     align-items: center;
 }
 
-.stepText {
-
-}
-
 .step {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 15px;
-}
-
-.line {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: 87vw;
-    margin-top: 25px;
-    color: #E3E3E3;
 }
