@@ -1,0 +1,14 @@
+.formHeaderContainer {
+    
+}
+
+.title {
+    font-size: 24px;  
+    color: var(--text-black);
+    font-weight: 600;
+}
+
+.subTitle {
+    font-size: 14px;
+    color: var(--text-gray);
+}
