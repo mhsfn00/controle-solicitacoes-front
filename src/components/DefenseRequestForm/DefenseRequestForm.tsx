@@ -16,12 +16,19 @@ import { cn } from "@/lib/utils"
 import styles from "./DefenseRequestForm.module.css"
 import FormHeader from "../FormHeader/FormHeader"
 import { CustomFileInput } from "../CustomFileInput/CustomFileInput"
+import ProgressStepper from "../ProgressStepper/ProgressStepper"
 
 const defenseModality = [
   { value: "inPerson", label: "Presencial"},
   { value: "remote", label: "Remoto"},
   { value: "hybrid", label: "Híbrido"},
 ];
+
+const steps = [
+  { id: 0, label: '1', text: 'Informações Gerais'},
+  { id: 1, label: '2', text: 'Informações Dissertação'},
+  { id: 2, label: '3', text: 'Banca Examinadora'}
+]
 
 const cities = ["Maringá", "Cidade 2", "Cidade 3"] as const;
 
@@ -78,6 +85,7 @@ export function DefenseRequestForm() {
 
   return (
     <Form {...form}>
+      <ProgressStepper steps={steps} currentStep={currentStep}/>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {currentStep === 0 && (
 
@@ -393,6 +401,7 @@ export function DefenseRequestForm() {
 
         )}
         {currentStep === 2 && (
+
           <div>
             <div className="flex-col py-10">
               <Button
@@ -411,6 +420,7 @@ export function DefenseRequestForm() {
               Cadastrar
             </Button>
           </div>
+
         )}
       </form>
     </Form>
