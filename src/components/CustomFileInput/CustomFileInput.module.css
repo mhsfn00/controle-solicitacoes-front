@@ -1,0 +1,18 @@
+.inputContainer {
+    background-color: white;
+}
+
+.circle {
+    background-color: black;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.subTitle {
+    font-size: 14px;
+}

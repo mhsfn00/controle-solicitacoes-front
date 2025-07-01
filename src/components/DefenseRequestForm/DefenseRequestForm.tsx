@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Calendar } from "@/components/ui/calendar"
@@ -13,9 +13,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CalendarIcon, ChevronRightIcon } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
-import { Link } from "react-router-dom"
 import styles from "./DefenseRequestForm.module.css"
 import FormHeader from "../FormHeader/FormHeader"
+import { CustomFileInput } from "../CustomFileInput/CustomFileInput"
 
 const defenseModality = [
   { value: "inPerson", label: "Presencial"},
@@ -31,8 +31,8 @@ const formSchema = z.object({
   defenseModality: z.enum(["inPerson", "remote", "hybrid"]),
   date: z.coerce.date(),
   time: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/),
-  block: z.string().min(2).max(50),
-  room: z.string().min(2).max(50),
+  block: z.string(),
+  room: z.string(),
   city: z.enum(cities),
   thesisTitle: z.string(),
   advisor: z.string(),
@@ -66,6 +66,11 @@ export function DefenseRequestForm() {
       setCurrentStep((step) => step + 1);
     }
   }
+  const previousStep = () => {
+    if (currentStep > 0) {
+      setCurrentStep((step) => step - 1);
+    }
+  }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
@@ -78,7 +83,13 @@ export function DefenseRequestForm() {
 
           <div className={styles.step1}>
             <div className="flex-col py-10 ">
-              <Link to="/previous">Voltar</Link>
+              <Button 
+                variant="link" 
+                className="p-0 underline font-semibold"
+                onClick={previousStep}
+              >
+                Voltar
+              </Button>
               <FormHeader
                 title="Informações Gerais"
                 subTitle="Dados referentes ao acadêmico e os detalhes de sua defesa."
@@ -98,7 +109,7 @@ export function DefenseRequestForm() {
                     <FormControl>
                       <Input placeholder="pg123456@uem.br" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    
                   </FormItem>
                 )}
               />
@@ -114,7 +125,7 @@ export function DefenseRequestForm() {
                     <FormControl>
                       <Input placeholder="123456" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    
                   </FormItem>
                 )}
               />
@@ -151,7 +162,7 @@ export function DefenseRequestForm() {
                         ))}
                       </RadioGroup>
                     </FormControl>
-                    <FormMessage />
+                    
                   </FormItem>
                 )}
               />
@@ -192,7 +203,7 @@ export function DefenseRequestForm() {
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormMessage />
+                    
                   </FormItem>
                 )}
               />
@@ -209,7 +220,7 @@ export function DefenseRequestForm() {
                         type="time"
                         {...field} />
                     </FormControl>
-                    <FormMessage />
+                    
                   </FormItem>
                 )}
               />
@@ -236,7 +247,7 @@ export function DefenseRequestForm() {
                         ))}
                       </SelectContent>
                     </Select>
-                    <FormMessage />
+                    
                   </FormItem>
                 )}
               />
@@ -249,7 +260,7 @@ export function DefenseRequestForm() {
                     <FormControl>
                       <Input placeholder="C56" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    
                   </FormItem>
                 )}
               />
@@ -262,7 +273,7 @@ export function DefenseRequestForm() {
                     <FormControl>
                       <Input placeholder="102 - Anfiteatro" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    
                   </FormItem>
                 )}
               />
@@ -280,13 +291,22 @@ export function DefenseRequestForm() {
         {currentStep === 1 && (
 
           <div className={styles.step2}>
-            <div className="flex-col py-10 ">
+            <div>
 
-              <Link to="/previous">Voltar</Link>
-              <FormHeader
-                title="Informações Dissertação"
-                subTitle="Informe os dados da dissertação que será submetida à defesa."
-              />
+              <div className="flex-col py-10">
+                <Button
+                  variant="link"
+                  className="p-0 underline font-semibold"
+                  onClick={previousStep}
+                >
+                  Voltar
+                </Button>
+                <FormHeader
+                  title="Informações Dissertação"
+                  subTitle="Informe os dados da dissertação que será submetida à defesa."
+                />
+              </div>
+
               <div className="flex-col gap-5 py-2">
 
                 <FormField
@@ -301,11 +321,15 @@ export function DefenseRequestForm() {
                       <FormControl>
                         <Input placeholder="Título da dissertação" {...field} />
                       </FormControl>
-                      <FormMessage />
+                      
                     </FormItem>
                   )}
                 />
               
+                <div className="w-full py-2">
+                  <CustomFileInput/>
+                </div>
+
                 <FormField
                   control={form.control}
                   name="advisor"
@@ -318,7 +342,7 @@ export function DefenseRequestForm() {
                       <FormControl>
                         <Input placeholder="Nome do orientador(a)" {...field} />
                       </FormControl>
-                      <FormMessage />
+                      
                     </FormItem>
                   )}
                 />
@@ -335,7 +359,7 @@ export function DefenseRequestForm() {
                       <FormControl>
                         <Input placeholder="Nome do 1º coorientador(a)" {...field} />
                       </FormControl>
-                      <FormMessage />
+                      
                     </FormItem>
                   )}
                 />
@@ -352,7 +376,7 @@ export function DefenseRequestForm() {
                       <FormControl>
                         <Input placeholder="Nome do 2º coorientador(a)" {...field} />
                       </FormControl>
-                      <FormMessage />
+                      
                     </FormItem>
                   )}
                 />
@@ -369,9 +393,24 @@ export function DefenseRequestForm() {
 
         )}
         {currentStep === 2 && (
+          <div>
+            <div className="flex-col py-10">
+              <Button
+                variant="link"
+                className="p-0 underline font-semibold"
+                onClick={previousStep}
+              >
+                Voltar
+              </Button>
+              <FormHeader
+                title="Informações Dissertação"
+                subTitle="Informe os dados da dissertação que será submetida à defesa."
+              />
+            </div>
             <Button type="submit">
-              Submit
+              Cadastrar
             </Button>
+          </div>
         )}
       </form>
     </Form>
