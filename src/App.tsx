@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage.tsx'
 import DefenseRequestPage from './pages/DefenseRequestPage/DefenseRequestPage.tsx';
+import AcademicRegisterPage from './pages/AcademicRegisterPage/AcademicRegisterPage.tsx';
 import Navbar from './components/NavBar/NavBar.tsx';
 
 const App: React.FC = () => {
@@ -11,6 +12,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/defenseRequest" element={<DefenseRequestPage />} />
+        <Route path="/academicRegister" element={<AcademicRegisterPage />} />
       </Routes>
     </Router>
   );
