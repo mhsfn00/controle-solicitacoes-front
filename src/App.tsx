@@ -6,6 +6,7 @@ import AcademicRegisterPage from './pages/AcademicRegisterPage/AcademicRegisterP
 import Navbar from './components/NavBar/NavBar.tsx';
 import ProfessorRegistryPage from './pages/ProfessorRegistryPage/ProfessorRegistryPage.tsx';
 import CourseRegistryPage from './pages/CourseRegistryPage/CourseRegistryPage.tsx';
+import ExternalMemberRegistryPage from './pages/ExternalMemberRegistryPage/ExternalMemberRegistryPage.tsx';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Route path="/professor" element={<ProfessorRegistryPage />} />
         <Route path="/aluno" element={<AcademicRegisterPage />} />
         <Route path="/course" element={<CourseRegistryPage />} />
+        <Route path="/external-member" element={<ExternalMemberRegistryPage />} />
       </Routes>
     </Router>
   );
