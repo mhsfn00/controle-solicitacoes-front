@@ -5,6 +5,7 @@ const Navbar: React.FC = () => (
   <nav className={styles.navbarContainer}>
     <Link to="/">Início</Link>
     <Link to="/defenseRequest">Solicitação de Defesa</Link>
+    <Link to="/professor">Registro de Professores</Link>
   </nav>
 );
 
