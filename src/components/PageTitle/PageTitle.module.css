@@ -1,0 +1,7 @@
+.pageTitle {
+    margin-top: 38px;
+    font-size: 24px;  
+    color: var(--text-black);
+    font-weight: 500;
+    padding-bottom: 80px;
+}
