@@ -179,7 +179,7 @@ export function DefenseRequestForm() {
                 name="date"
                 render={({ field }) => (
                   <FormItem className="flex-col">
-                    <FormLabel>Date of birth</FormLabel>
+                    <FormLabel>Data da Defesa</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
