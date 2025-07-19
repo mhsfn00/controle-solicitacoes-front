@@ -13,6 +13,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/defenseRequest" element={<DefenseRequestPage />} />
+        <Route path="/professor" element={<ProfessorRegistryPage />} />
+        <Route path="/aluno" element={<AcademicRegisterPage />} />
       </Routes>
     </Router>
   );

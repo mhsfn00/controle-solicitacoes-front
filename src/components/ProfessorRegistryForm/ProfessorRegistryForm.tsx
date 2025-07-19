@@ -18,7 +18,7 @@ export const ProfessorRegistryForm: React.FC = () => {
             cpf: "",
             email: "",
             lattes: [],
-            nomeMembroExterno: "",
+            nomeDocente: "",
             telefone: "",
             titularidade: 'MESTRADO'
         },
@@ -36,11 +36,11 @@ export const ProfessorRegistryForm: React.FC = () => {
              <div className="flex gap-5 py-2 mt-8">
                <FormField
                  control={form.control}
-                 name="nomeMembroExterno"
+                 name="nomeDocente"
                  render={({ field }) => (
                    <FormItem className="w-7/10">
                      <FormLabel className="gap-0">
-                       Nome do Membro Externo
+                       Nome do Docente
                        <span className="text-red-500">*</span>
                      </FormLabel>
                      <FormControl>
@@ -62,7 +62,7 @@ export const ProfessorRegistryForm: React.FC = () => {
                      <FormControl>
                     <Input
                         {...field}
-                        placeholder="00000000000"
+                        placeholder="000.000.000-00"
                         maxLength={11}
                         onChange={(e) => {
                             const onlyNums = e.target.value.replace(/\D/g, '');
