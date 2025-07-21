@@ -9,43 +9,15 @@ import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CalendarIcon, ChevronRightIcon } from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
-import styles from "./DefenseRequestForm.module.css"
 import FormHeader from "../FormHeader/FormHeader"
 import { CustomFileInput } from "../CustomFileInput/CustomFileInput"
 import ProgressStepper from "../ProgressStepper/ProgressStepper"
-
-const defenseModality = [
-  { value: "inPerson", label: "Presencial"},
-  { value: "remote", label: "Remoto"},
-  { value: "hybrid", label: "Híbrido"},
-];
-
-const steps = [
-  { id: 0, label: '1', text: 'Informações Gerais'},
-  { id: 1, label: '2', text: 'Informações Dissertação'},
-  { id: 2, label: '3', text: 'Banca Examinadora'}
-]
-
-const cities = ["Maringá", "Cidade 2", "Cidade 3"] as const;
-
-const formSchema = z.object({
-  username: z.string(),
-  academicRecord: z.string(),
-  defenseModality: z.enum(["inPerson", "remote", "hybrid"]),
-  date: z.coerce.date(),
-  time: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/),
-  block: z.string(),
-  room: z.string(),
-  city: z.enum(cities),
-  thesisTitle: z.string(),
-  advisor: z.string(),
-  coAdvisor1: z.string(),
-  coAdvisor2: z.string(),
-});
+import { useNavigate } from "react-router-dom"
+import { defenseModality, steps, formSchema } from "./defenseFormSchema";
+import { BoardMember } from "./BoardMember"
 
 export function DefenseRequestForm() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -61,9 +33,13 @@ export function DefenseRequestForm() {
       advisor: "",
       coAdvisor1: "",
       coAdvisor2: "",
+      defenseModality: 'inPerson',
+      link: ""
     },
   });
 
+  const navigate = useNavigate();
+  const selectedModality = form.watch("defenseModality");
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => {
@@ -76,6 +52,8 @@ export function DefenseRequestForm() {
   const previousStep = () => {
     if (currentStep > 0) {
       setCurrentStep((step) => step - 1);
+    } else {
+      navigate('/');
     }
   }
 
@@ -89,7 +67,7 @@ export function DefenseRequestForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {currentStep === 0 && (
 
-          <div className={styles.step1}>
+          <div>
             <div className="flex-col py-10 ">
               <Button 
                 variant="link" 
@@ -139,7 +117,7 @@ export function DefenseRequestForm() {
               />
             </div>
 
-            <div className="flex gap-5 py-2 justify-between">
+            <div className="flex gap-5 py-8 justify-between">
               <FormField
                 control={form.control}
                 name="defenseModality"
@@ -174,120 +152,115 @@ export function DefenseRequestForm() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="date"
-                render={({ field }) => (
-                  <FormItem className="flex-col">
-                    <FormLabel>Data da Defesa</FormLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            variant={"outline"}
-                            className={cn(
-                              "text-left font-normal",
-                              !field.value && "text-muted-foreground"
-                            )}
-                          >
-                            {field.value ? (
-                              format(field.value, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) =>
-                            date > new Date() || date < new Date("1900-01-01")
-                          }
-                          captionLayout="dropdown"
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="time"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="gap-0">
-                      Horário
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="time"
-                        {...field} />
-                    </FormControl>
-                    
-                  </FormItem>
-                )}
-              />
             </div>
 
-            <div className="flex gap-5 py-2 justify-between">
-              <FormField
-                control={form.control}
-                name="city"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Cidade</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <div className="flex-row gap-5 py-2">
+              <div className="flex gap-5">
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem className="flex-col">
+                      <FormLabel>Data</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                            captionLayout="dropdown"
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="time"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="gap-0">
+                        Horário
+                      </FormLabel>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecione" />
-                        </SelectTrigger>
+                        <Input
+                          type="time"
+                          {...field} />
                       </FormControl>
-                      <SelectContent>
-                        {cities.map((city) => (
-                          <SelectItem key={city} value={city}>
-                            {city}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    
-                  </FormItem>
+                    </FormItem>
+                  )}
+                />
+                {(selectedModality === "inPerson" || selectedModality == "hybrid") && (
+                  <div className="flex gap-5">
+                    <FormField
+                      control={form.control}
+                      name="block"
+                      render={({ field }) => (
+                        <FormItem className="w-1/3">
+                          <FormLabel>Bloco</FormLabel>
+                          <FormControl>
+                            <Input placeholder="C56" {...field} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="room"
+                      render={({ field }) => (
+                        <FormItem className="w-2/3">
+                          <FormLabel>Sala</FormLabel>
+                          <FormControl>
+                            <Input placeholder="102 - Anfiteatro" {...field} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 )}
-              />
-              <FormField
-                control={form.control}
-                name="block"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Bloco</FormLabel>
-                    <FormControl>
-                      <Input placeholder="C56" {...field} />
-                    </FormControl>
-                    
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="room"
-                render={({ field }) => (
-                  <FormItem className="w-1/2">
-                    <FormLabel>Sala</FormLabel>
-                    <FormControl>
-                      <Input placeholder="102 - Anfiteatro" {...field} />
-                    </FormControl>
-                    
-                  </FormItem>
-                )}
-              />
+              </div>
+              {(selectedModality === "remote" || selectedModality == "hybrid") && (
+                <FormField
+                  control={form.control}
+                  name="link"
+                  render={({ field }) => (
+                    <FormItem className="py-6">
+                      <FormLabel>Link</FormLabel>
+                      <FormControl>
+                        <Input placeholder="meet.google.com/vfg-ehmw-vvp" {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              )}
             </div>
             
-            <div className="flex justify-end my-10">
+            <div className="flex justify-end gap-4 py-10">
+              <Button type="reset" className="bg-[#F62D2D] text-white hover:bg-red-700" onClick={() => navigate('/')}>
+                Cancelar
+              </Button>
               <Button onClick={nextStep}>
                 Continuar
                 <ChevronRightIcon/>
@@ -298,7 +271,7 @@ export function DefenseRequestForm() {
         )}
         {currentStep === 1 && (
 
-          <div className={styles.step2}>
+          <div >
             <div>
 
               <div className="flex-col py-10">
@@ -390,7 +363,10 @@ export function DefenseRequestForm() {
                 />
               
               </div>
-              <div className="flex justify-end my-10">
+              <div className="flex justify-end gap-4 py-10">
+                <Button type="reset" className="bg-[#F62D2D] text-white hover:bg-red-700" onClick={() => navigate('/')}>
+                    Cancelar
+                </Button>
                 <Button onClick={nextStep}>
                   Continuar
                   <ChevronRightIcon/>
@@ -412,13 +388,35 @@ export function DefenseRequestForm() {
                 Voltar
               </Button>
               <FormHeader
-                title="Informações Dissertação"
-                subTitle="Informe os dados da dissertação que será submetida à defesa."
+                title="Banca Examinadora"
+                subTitle="Informações sobre os docentes que irão compor a banca examinadora."
               />
             </div>
-            <Button type="submit">
-              Cadastrar
-            </Button>
+
+            <div className="flex-col gap-5 py-2">
+              <h2>Membros Titulares</h2>
+
+              {/* <BoardMember  />
+              <BoardMember />
+              <BoardMember /> */}
+              <BoardMember 
+                memberType="titular" 
+                name="firstTitularMember" 
+                memberTitle="firstTitularMemberstitle" 
+                institution="firstTitularMembersInstitution" 
+                eMail="firstTitularMembersEmail"
+                hardCopy="firstTitularMemberCopy"
+              />
+            </div>
+
+            <div className="flex justify-end gap-4 py-10">
+                <Button type="reset" className="bg-[#F62D2D] text-white hover:bg-red-700" onClick={() => navigate('/')}>
+                    Cancelar
+                </Button>
+                <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
+                    Cadastrar
+                </Button>
+            </div>
           </div>
 
         )}
