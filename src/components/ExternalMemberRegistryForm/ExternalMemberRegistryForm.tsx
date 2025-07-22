@@ -35,7 +35,7 @@ export const ExternalMemberRegistryForm: React.FC = () => {
     <Form {...form}> 
       <FormHeader title="Informações do Membro Externo" subTitle="Informe os dados do membro externo e sua especialização na banca."/>
       
-             <div className="flex gap-5 py-2 mt-8">
+             <div className="flex gap-5 py-4 mt-8">
                <FormField
                  control={form.control}
                  name="nomeMembroExterno"
@@ -77,7 +77,7 @@ export const ExternalMemberRegistryForm: React.FC = () => {
                />
              </div>
       
-             <div className="flex gap-5 py-2">
+             <div className="flex gap-5 py-4">
               <FormField
                   control={form.control}
                   name="titularidade"
@@ -91,7 +91,7 @@ export const ExternalMemberRegistryForm: React.FC = () => {
                         <RadioGroup
                           onValueChange={field.onChange}
                           value={field.value}
-                          className="flex space-y-1"
+                          className="flex gap-5"
                         >
                           {titularidadeValues.map((option) => (
                             <FormItem
@@ -118,18 +118,18 @@ export const ExternalMemberRegistryForm: React.FC = () => {
                  render={({ field }) => (
                    <FormItem className="w-7/10">
                      <FormLabel className="gap-0">
-                       Formação de Origem
+                       Instituição de Origem
                        <span className="text-red-500">*</span>
                      </FormLabel>
                      <FormControl>
-                       <Input placeholder="Alan Turing" {...field} />
+                       <Input placeholder="Universidade Estadual de Maringá" {...field} />
                      </FormControl>
                    </FormItem>
                  )}
                 />
              </div>
 
-             <div className="flex gap-5 py-2">
+             <div className="flex gap-5 py-4">
                <FormField
                  control={form.control}
                  name="email"
