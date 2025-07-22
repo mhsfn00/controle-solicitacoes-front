@@ -5,3 +5,17 @@
     font-weight: 500;
     padding-bottom: 80px;
 }
+
+.shield, .cap {
+    position: absolute;
+}
+
+.background {
+    background-color: #A3FD55;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

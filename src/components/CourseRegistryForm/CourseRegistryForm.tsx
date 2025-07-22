@@ -102,7 +102,7 @@ export const CourseRegistryForm: React.FC = () => {
                  render={({ field }) => (
                    <FormItem>
                      <FormLabel className="gap-0">
-                       Tipo
+                       Categoria
                        <span className="text-red-500">*</span>
                      </FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
