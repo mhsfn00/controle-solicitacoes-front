@@ -33,7 +33,7 @@ export const CourseRegistryForm: React.FC = () => {
 
         <Form {...form} >
           <FormHeader title="Informações de nova linha de pesquisa" subTitle="Informe os dados da Linha de Pesquisa e Curso."/>
-             <div className="flex gap-5 py-2 mt-8">
+             <div className="flex gap-5 py-4 mt-8">
                <FormField
                  control={form.control}
                  name="tipo"
@@ -95,7 +95,7 @@ export const CourseRegistryForm: React.FC = () => {
              </div>
 
 
-             <div className="flex gap-5 py-2">
+             <div className="flex gap-5 py-4">
                <FormField
                  control={form.control}
                  name="categoria"
@@ -141,7 +141,7 @@ export const CourseRegistryForm: React.FC = () => {
              </div>
 
             
-             <div className="flex gap-5 py-2">
+             <div className="flex gap-5 py-4">
                <FormField
                  control={form.control}
                  name="cidade"

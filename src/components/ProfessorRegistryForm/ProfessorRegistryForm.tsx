@@ -89,7 +89,7 @@ export const ProfessorRegistryForm: React.FC = () => {
                       <RadioGroup
                         onValueChange={field.onChange}
                         value={field.value}
-                        className="flex space-y-1"
+                        className="flex gap-5"
                       >
                         {titularidadeValues.map((option) => (
                           <FormItem
@@ -150,7 +150,7 @@ export const ProfessorRegistryForm: React.FC = () => {
                />
              </div>
 
-                <div className="w-full py-2">
+                <div className="w-full py-8">
 
                 <FormField
                     control={form.control}
