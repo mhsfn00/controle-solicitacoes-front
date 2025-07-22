@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { useForm, FormProvider } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel} from "@/components/ui/form"
@@ -34,7 +34,29 @@ export function DefenseRequestForm() {
       coAdvisor1: "",
       coAdvisor2: "",
       defenseModality: 'inPerson',
-      link: ""
+      link: "",
+      titularMembers: Array(3).fill({
+        type: "titular",
+        name: "",
+        title: "",
+        institution: "",
+        eMail: "",
+        hardCopy: "não"
+      }),
+      suplenteMembers: Array(3).fill({
+        type: "suplente",
+        name: "",
+        title: "",
+        institution: "",
+        eMail: "",
+        hardCopy: "não"
+      }),
+      externalMembers: Array(2).fill({
+        type: "externo",
+        name: "",
+        eMail: "",
+        lattes: ""
+      })
     },
   });
 
@@ -161,7 +183,10 @@ export function DefenseRequestForm() {
                   name="date"
                   render={({ field }) => (
                     <FormItem className="flex-col">
-                      <FormLabel>Data</FormLabel>
+                      <FormLabel className="gap-0">
+                        Data
+                        <span className="text-red-500">*</span>
+                      </FormLabel>
                       <Popover>
                         <PopoverTrigger asChild>
                           <FormControl>
@@ -203,6 +228,7 @@ export function DefenseRequestForm() {
                     <FormItem>
                       <FormLabel className="gap-0">
                         Horário
+                        <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -335,7 +361,6 @@ export function DefenseRequestForm() {
                     <FormItem className="w-full py-2">
                       <FormLabel className="gap-0">
                         1º Coorientador(a)
-                        <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input placeholder="Nome do 1º coorientador(a)" {...field} />
@@ -352,7 +377,6 @@ export function DefenseRequestForm() {
                     <FormItem className="w-full py-2">
                       <FormLabel className="gap-0">
                         2º Coorientador(a)
-                        <span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input placeholder="Nome do 2º coorientador(a)" {...field} />
@@ -394,19 +418,32 @@ export function DefenseRequestForm() {
             </div>
 
             <div className="flex-col gap-5 py-2">
-              <h2>Membros Titulares</h2>
-
-              {/* <BoardMember  />
-              <BoardMember />
-              <BoardMember /> */}
-              <BoardMember 
-                memberType="titular" 
-                name="firstTitularMember" 
-                memberTitle="firstTitularMemberstitle" 
-                institution="firstTitularMembersInstitution" 
-                eMail="firstTitularMembersEmail"
-                hardCopy="firstTitularMemberCopy"
-              />
+              <FormProvider {...form}>
+                <h2 className="text-xl font-semibold">Membros Titulares</h2>
+                  {form.watch("titularMembers").map((member, index) => (
+                    <BoardMember
+                      key={index}
+                      index={index}
+                      member={member}
+                    />
+                  ))}
+                <h2 className="text-xl font-semibold">Membros Suplentes</h2>
+                  {form.watch("suplenteMembers").map((member, index) => (
+                    <BoardMember
+                      key={index}
+                      index={index}
+                      member={member}
+                    />
+                  ))}
+                <h2 className="text-xl font-semibold">Membros Externos</h2>
+                  {form.watch("externalMembers").map((member, index) => (
+                    <BoardMember
+                      key={index}
+                      index={index}
+                      member={member}
+                    />
+                  ))}
+              </FormProvider>
             </div>
 
             <div className="flex justify-end gap-4 py-10">
