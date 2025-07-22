@@ -6,7 +6,7 @@ const ExternalMemberRegistryPage: React.FC = () => {
 
         <div className="pageContainer">
             <div className="pageContent">
-                <PageTitle title="Cadastro de Membro Externo"/>
+                <PageTitle showShield={true} title="Cadastro de Membro Externo"/>
                 <ExternalMemberRegistryForm />
             </div>
         </div>
