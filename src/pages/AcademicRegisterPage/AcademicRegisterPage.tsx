@@ -7,7 +7,7 @@ const AcademicRegisterPage: React.FC = () =>
         
         <div className="pageContainer">
             <div className="pageContent">
-                <PageTitle title="Cadastro de Aluno" />
+                <PageTitle showShield={false} title="Cadastro de Aluno" />
                 <PersonRegisterForm />
             </div>
         </div>
