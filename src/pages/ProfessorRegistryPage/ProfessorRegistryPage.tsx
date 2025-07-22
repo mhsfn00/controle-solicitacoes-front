@@ -6,7 +6,7 @@ const ProfessorRegistryPage: React.FC = () => {
 
         <div className="pageContainer">
             <div className="pageContent">
-                <PageTitle title="Cadastro de Docente"/>
+                <PageTitle showShield={false} title="Cadastro de Docente"/>
                 <ProfessorRegistryForm />
             </div>
         </div>

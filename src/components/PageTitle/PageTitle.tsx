@@ -1,14 +1,20 @@
 import styles from "./PageTitle.module.css"
+import { GraduationCap, Shield } from "lucide-react"
 
 export type PageTitleProps = {
-    title: string
+    title: string;
+    showShield: boolean;
 }
 
 
 export const PageTitle = (
-    { title }: PageTitleProps
+    { title, showShield }: PageTitleProps
 ): React.ReactElement => (
         <div className={styles.pageTitle}>
-            {title}
+            {showShield && (<div className={styles.background}>
+                <GraduationCap size={20} strokeWidth={1.5} className={styles.cap}/>
+                <Shield size={40} strokeWidth={1}  className={styles.shield}/>
+            </div>)}
+            <div>{title}</div>
         </div>
 )
