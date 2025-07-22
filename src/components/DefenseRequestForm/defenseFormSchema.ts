@@ -12,21 +12,6 @@ export const steps = [
   { id: 2, label: '3', text: 'Banca Examinadora'}
 ];
 
-const firstSteps = z.object({
-  username: z.string().nonempty(),
-  academicRecord: z.string().nonempty(),
-  defenseModality: z.enum(["inPerson", "remote", "hybrid"]),
-  date: z.coerce.date(),
-  time: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).nonempty(),
-  block: z.string(),
-  room: z.string(),
-  thesisTitle: z.string().nonempty(),
-  advisor: z.string().nonempty(),
-  coAdvisor1: z.string(),
-  coAdvisor2: z.string(),
-  link: z.string(),
-});
-
 const titularMemberSchema = z.object({
   type: z.literal("titular"),
   name: z.string().nonempty(),
@@ -47,21 +32,26 @@ const suplenteMemberSchema = z.object({
 
 const externalMemberSchema = z.object({
   type: z.literal("externo"),
-  name: z.string().nonempty(),
-  eMail: z.string().email(),
+  name: z.string(),
+  eMail: z.string(),
   lattes: z.string()
 })
 
-const titularMembers = z.object({
-  titularMembers: z.array(titularMemberSchema)
-});
-
-const suplenteMembers = z.object({
-  suplenteMembers: z.array(suplenteMemberSchema)
-});
-
-const externalMembers = z.object({
+export const formSchema = z.object({
+  username: z.string().nonempty(),
+  academicRecord: z.string().nonempty(),
+  defenseModality: z.enum(["inPerson", "remote", "hybrid"]),
+  date: z.coerce.date(),
+  time: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).nonempty(),
+  block: z.string(),
+  room: z.string(),
+  thesisTitle: z.string().nonempty(),
+  advisor: z.string().nonempty(),
+  coAdvisor1: z.string(),
+  coAdvisor2: z.string(),
+  link: z.string(),
+  thesisFile: z.array(z.instanceof(File)).min(1, { message: 'O arquivo da tese é obrigatório.'}),
+  titularMembers: z.array(titularMemberSchema),
+  suplenteMemberSchema: z.array(suplenteMemberSchema),
   externalMembers: z.array(externalMemberSchema)
 });
-
-export const formSchema = firstSteps.merge(titularMembers).merge(suplenteMembers).merge(externalMembers);

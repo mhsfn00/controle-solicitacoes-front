@@ -6,31 +6,27 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { CustomFileInput } from "../CustomFileInput/CustomFileInput";
 
 interface BoardMemberProps {
-    index: number;
-    member: {
-      type: "titular" | "suplente" | "externo";
-      name: string;
-      eMail: string;
-      title?: "mestrado" | "doutorado";
-      institution?: string;
-      hardCopy?: string;
-      lattes?: string;
-    }
+  index: number;
+  nameField: string;
+  emailField: string;
+  titleField?: string;
+  institutionField?: string;
+  hardCopyField?: string;
+  type: "titular" | "suplente" | "externo";
 }
 
-export const BoardMember: React.FC<BoardMemberProps> = ({ index, member }) => {
+export const BoardMember: React.FC<BoardMemberProps> = ({ index, nameField, emailField, titleField, institutionField, hardCopyField, type }) => {
     const { control } = useFormContext();
-
     return(
         <div className="flex-row w-full py-5">
             <div className="flex col gap-5 w-full py-4">
                 <FormField
                     control={control}
-                    name={`member.${index}${member.type}.name`}
+                    name={nameField}
                     render={({ field }) => (
                         <FormItem className="w-4/5">
                             <FormLabel className="gap-0 capitalize">
-                              {index + 1}º Membro {member.type}
+                              {index % 3 + 1}º Membro {type}
                               <span className="text-red-500">*</span>
                             </FormLabel>
                             <FormControl>
@@ -39,9 +35,9 @@ export const BoardMember: React.FC<BoardMemberProps> = ({ index, member }) => {
                         </FormItem>
                     )}
                 />
-                {(member.type == "titular" ||  member.type == "suplente") && (<FormField
+                {(type == "titular" ||  type == "suplente") && titleField && (<FormField
                      control={control}
-                     name={`member.${index}${member.type}.title`}
+                     name={titleField}
                      render={({ field }) => (
                        <FormItem>
                          <FormLabel className="gap-0 capitalize">
@@ -55,7 +51,7 @@ export const BoardMember: React.FC<BoardMemberProps> = ({ index, member }) => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="capitalize">
-                            {["mestrado", "doutorado"].map((title) => (
+                            {["Mestrado", "Doutorado"].map((title) => (
                               <SelectItem key={title} value={title}>
                                 {title}
                               </SelectItem>
@@ -66,9 +62,9 @@ export const BoardMember: React.FC<BoardMemberProps> = ({ index, member }) => {
                     )}
                 />)}
             </div>
-            {(member.type == "titular" ||  member.type == "suplente") && (<FormField
+            {(type == "titular" ||  type == "suplente") && institutionField && (<FormField
                 control={control}
-                name={`member.${index}${member.type}.institution`}
+                name={institutionField}
                 render={({ field }) => (
                     <FormItem className="py-2">
                         <FormLabel className="gap-0">
@@ -83,7 +79,7 @@ export const BoardMember: React.FC<BoardMemberProps> = ({ index, member }) => {
             />)}
             <FormField
                 control={control}
-                name={`member.${index}${member.type}.eMail`}
+                name={emailField}
                 render={({ field }) => (
                     <FormItem className="py-2">
                         <FormLabel className="gap-0">
@@ -96,9 +92,9 @@ export const BoardMember: React.FC<BoardMemberProps> = ({ index, member }) => {
                     </FormItem>
                 )}
             />
-            {(member.type == "titular" ||  member.type == "suplente") && member.hardCopy && (<FormField
+            {(type == "titular" ||  type == "suplente") && hardCopyField && (<FormField
                 control={control}
-                name={`member.${index}${member.type}.hardCopy`}
+                name={hardCopyField}
                 render={({ field }) => (
                   <FormItem className="py-2">
                     <FormLabel className="gap-0">
@@ -129,7 +125,7 @@ export const BoardMember: React.FC<BoardMemberProps> = ({ index, member }) => {
                   </FormItem>
                 )}
               />)}
-              {member.type == "externo" && (
+              {type == "externo" && (
                 <div className="w-full py-2">
                   <CustomFileInput />
                 </div>

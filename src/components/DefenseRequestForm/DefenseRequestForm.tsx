@@ -16,12 +16,13 @@ import FormHeader from "../FormHeader/FormHeader"
 import { CustomFileInput } from "../CustomFileInput/CustomFileInput"
 import ProgressStepper from "../ProgressStepper/ProgressStepper"
 import { useNavigate } from "react-router-dom"
-import { defenseModality, steps, formSchema } from "./defenseFormSchema";
+import { formSchema, steps, defenseModality } from "./defenseFormSchema";
 import { BoardMember } from "./BoardMember"
 
 export function DefenseRequestForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    shouldUnregister: true,
     defaultValues: {
       username: "",
       academicRecord: "",
@@ -35,38 +36,54 @@ export function DefenseRequestForm() {
       coAdvisor2: "",
       defenseModality: 'inPerson',
       link: "",
-      titularMembers: Array(3).fill({
-        type: "titular",
-        name: "",
-        title: "",
-        institution: "",
-        eMail: "",
-        hardCopy: "não"
-      }),
-      suplenteMembers: Array(3).fill({
-        type: "suplente",
-        name: "",
-        title: "",
-        institution: "",
-        eMail: "",
-        hardCopy: "não"
-      }),
-      externalMembers: Array(2).fill({
-        type: "externo",
-        name: "",
-        eMail: "",
-        lattes: ""
-      })
-    },
+      titularMembers: [
+        { type: "titular", name: "", title: "mestrado", eMail: "", institution: "", hardCopy: "não" },
+        { type: "titular", name: "", title: "mestrado", eMail: "", institution: "", hardCopy: "não" },
+        { type: "titular", name: "", title: "mestrado", eMail: "", institution: "", hardCopy: "não" }
+      ],
+      suplenteMemberSchema: [
+        { type: "suplente", name: "", title: "mestrado", eMail: "", institution: "", hardCopy: "não" },
+        { type: "suplente", name: "", title: "mestrado", eMail: "", institution: "", hardCopy: "não" },
+        { type: "suplente", name: "", title: "mestrado", eMail: "", institution: "", hardCopy: "não" }
+      ],
+      externalMembers: [
+        { type: "externo", name: "", eMail: "", lattes: "" },
+        { type: "externo", name: "", eMail: "", lattes: "" }
+      ]
+    }
   });
 
   const navigate = useNavigate();
   const selectedModality = form.watch("defenseModality");
   const [currentStep, setCurrentStep] = useState(0);
 
-  const nextStep = () => {
-    // Need to check each step's inputs here before moving to next
 
+  async function validateFirstStep() { 
+    let isValid = await form.trigger(['username', 'academicRecord', 'defenseModality', 'date', 'time']);
+    const modality = form.getValues("defenseModality");
+
+    if (modality == "inPerson") {
+      console.log("pessoal")
+      isValid = isValid && await form.trigger(['block', 'room'])
+    } else if (modality == "remote") {
+      isValid = isValid && await form.trigger(['link'])
+    } else if (modality == "hybrid") {
+      isValid = isValid && await form.trigger(['block', 'room', 'link'])
+    }
+
+    if (isValid) {
+      nextStep();
+    }
+  }
+
+  async function validateSecondStep() {
+    const isValid = await form.trigger(['thesisTitle', 'advisor', 'thesisFile']);
+    if (isValid) {
+      nextStep();
+    }
+  }
+
+  const nextStep = () => {
     if (currentStep < 2) {
       setCurrentStep((step) => step + 1);
     }
@@ -115,9 +132,11 @@ export function DefenseRequestForm() {
                       <span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="pg123456@uem.br" {...field} />
+                      <Input 
+                        placeholder="pg123456@uem.br" 
+                        {...field}
+                      />
                     </FormControl>
-                    
                   </FormItem>
                 )}
               />
@@ -245,7 +264,10 @@ export function DefenseRequestForm() {
                       name="block"
                       render={({ field }) => (
                         <FormItem className="w-1/3">
-                          <FormLabel>Bloco</FormLabel>
+                          <FormLabel className="gap-0">
+                            Bloco
+                            <span className="text-red-500">*</span>
+                          </FormLabel>
                           <FormControl>
                             <Input placeholder="C56" {...field} />
                           </FormControl>
@@ -257,7 +279,10 @@ export function DefenseRequestForm() {
                       name="room"
                       render={({ field }) => (
                         <FormItem className="w-2/3">
-                          <FormLabel>Sala</FormLabel>
+                          <FormLabel className="gap-0">
+                            Sala
+                            <span className="text-red-500">*</span>
+                          </FormLabel>
                           <FormControl>
                             <Input placeholder="102 - Anfiteatro" {...field} />
                           </FormControl>
@@ -273,7 +298,10 @@ export function DefenseRequestForm() {
                   name="link"
                   render={({ field }) => (
                     <FormItem className="py-6">
-                      <FormLabel>Link</FormLabel>
+                      <FormLabel className="gap-0">
+                        Link
+                        <span className="text-red-500">*</span>
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder="meet.google.com/vfg-ehmw-vvp" {...field} />
                       </FormControl>
@@ -287,7 +315,7 @@ export function DefenseRequestForm() {
               <Button type="reset" className="bg-[#F62D2D] text-white hover:bg-red-700" onClick={() => navigate('/')}>
                 Cancelar
               </Button>
-              <Button onClick={nextStep}>
+              <Button onClick={validateFirstStep}>
                 Continuar
                 <ChevronRightIcon/>
               </Button>
@@ -332,9 +360,23 @@ export function DefenseRequestForm() {
                     </FormItem>
                   )}
                 />
-              
+
                 <div className="w-full py-2">
-                  <CustomFileInput/>
+                <FormField
+                    control={form.control}
+                    name="thesisFile"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel className="gap-0">
+                       Anexar Tese 
+                       <span className="text-red-500">*</span>
+                        </FormLabel>
+                        <FormControl>
+                                <CustomFileInput onChange={field.onChange} />
+                        </FormControl>
+                    </FormItem>
+                    )}
+                />
                 </div>
 
                 <FormField
@@ -391,7 +433,7 @@ export function DefenseRequestForm() {
                 <Button type="reset" className="bg-[#F62D2D] text-white hover:bg-red-700" onClick={() => navigate('/')}>
                     Cancelar
                 </Button>
-                <Button onClick={nextStep}>
+                <Button onClick={validateSecondStep}>
                   Continuar
                   <ChevronRightIcon/>
                 </Button>
@@ -420,28 +462,43 @@ export function DefenseRequestForm() {
             <div className="flex-col gap-5 py-2">
               <FormProvider {...form}>
                 <h2 className="text-xl font-semibold">Membros Titulares</h2>
-                  {form.watch("titularMembers").map((member, index) => (
-                    <BoardMember
-                      key={index}
-                      index={index}
-                      member={member}
-                    />
+                  {[0, 1, 2].map((index) => (
+                      <BoardMember
+                        key={index}
+                        index={index}
+                        type="titular"
+                        nameField={`titularMembers.${index}.name`}
+                        emailField={`titularMembers.${index}.eMail`}
+                        titleField={`titularMembers.${index}.title`}
+                        institutionField={`titularMembers.${index}.institution`}
+                        hardCopyField={`titularMembers.${index}.hardCopy`}
+                      />
                   ))}
                 <h2 className="text-xl font-semibold">Membros Suplentes</h2>
-                  {form.watch("suplenteMembers").map((member, index) => (
-                    <BoardMember
-                      key={index}
-                      index={index}
-                      member={member}
-                    />
+                  {[3, 4, 5].map((index) => (
+                      <BoardMember
+                        key={index}
+                        index={index}
+                        type="suplente"
+                        nameField={`titularMembers.${index}.name`}
+                        emailField={`titularMembers.${index}.eMail`}
+                        titleField={`titularMembers.${index}.title`}
+                        institutionField={`titularMembers.${index}.institution`}
+                        hardCopyField={`titularMembers.${index}.hardCopy`}
+                      />
                   ))}
                 <h2 className="text-xl font-semibold">Membros Externos</h2>
-                  {form.watch("externalMembers").map((member, index) => (
-                    <BoardMember
-                      key={index}
-                      index={index}
-                      member={member}
-                    />
+                  {[6, 7].map((index) => (
+                      <BoardMember
+                        key={index}
+                        index={index}
+                        type="externo"
+                        nameField={`titularMembers.${index}.name`}
+                        emailField={`titularMembers.${index}.eMail`}
+                        titleField={`titularMembers.${index}.title`}
+                        institutionField={`titularMembers.${index}.institution`}
+                        hardCopyField={`titularMembers.${index}.hardCopy`}
+                      />
                   ))}
               </FormProvider>
             </div>
@@ -450,7 +507,7 @@ export function DefenseRequestForm() {
                 <Button type="reset" className="bg-[#F62D2D] text-white hover:bg-red-700" onClick={() => navigate('/')}>
                     Cancelar
                 </Button>
-                <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
+                <Button type="submit" onClick={nextStep}>
                     Cadastrar
                 </Button>
             </div>
