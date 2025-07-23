@@ -52,6 +52,15 @@ const Navbar: React.FC = () => (
       <UserRoundPlusIcon />
       Registro de Membro Externo
     </Link>
+    <Link className={styles.navButton} to="/login">
+      Entrar
+    </Link>
+    <Link className={styles.navButton} to="/forgot-password">
+      Esqueceu a senha
+    </Link>
+    <Link className={styles.navButton} to="/reset-password">
+      Alterar senha
+    </Link>
     <Link className={`${styles.navButton} ${styles.navButtonRed}`} to="/">
       <LogOutIcon />
       Sair
