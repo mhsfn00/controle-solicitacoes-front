@@ -26,7 +26,7 @@ const CreateNewPasswordForm: React.FC = () => {
         console.log("Nova senha definida:", values.senha);
         // Lógica para salvar a nova senha e navegar para a tela de login
         alert("Senha alterada com sucesso!");
-        navigate('/login');
+        navigate('/login'); // Quando essa linha é executada, o usuário é redirecionado para /login
     };
 
     return (
