@@ -6,6 +6,9 @@ import {
   ExternalMemberRegistryPage,
   HomePage,
   ProfessorRegistryPage,
+  LoginRequestPage,
+  ForgotPasswordPage,
+  ResetPasswordPage
 } from "./pages";
 import {
   CalendarIcon,
@@ -66,6 +69,18 @@ export const routes: RoutesProps = {
     element: <ExternalMemberRegistryPage />,
     icon: <UserRoundPlusIcon />,
   },
+  login: {
+    path: "/login",
+    element: <LoginRequestPage />
+  },
+  forgotPassword: {
+    path: "/forgotPassword",
+    element: <ForgotPasswordPage />
+  },
+  resetPassword: {
+    path: "/resetPassword",
+    element: <ResetPasswordPage />
+  },
   requestExam: {
     path: "/",
     label: "Solicitar Exame",
@@ -76,5 +91,9 @@ export const routes: RoutesProps = {
     label: "Visualizar Status",
     icon: <TableCellsMergeIcon />,
   },
-  editPerfil: { path: "/", label: "Editar Perfil", icon: <UserRoundPenIcon /> },
+  editPerfil: { 
+    path: "/", 
+    label: "Editar Perfil", 
+    icon: <UserRoundPenIcon /> 
+  }
 };
