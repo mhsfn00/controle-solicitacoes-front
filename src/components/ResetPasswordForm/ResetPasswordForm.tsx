@@ -7,7 +7,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { Eye, EyeOff, LockKeyhole } from 'lucide-react'; // Ícone diferente para o cabeçalho
+import { Eye, EyeOff, LockKeyhole } from 'lucide-react';
 
 const CreateNewPasswordForm: React.FC = () => {
     const navigate = useNavigate();
@@ -26,20 +26,19 @@ const CreateNewPasswordForm: React.FC = () => {
         console.log("Nova senha definida:", values.senha);
         // Lógica para salvar a nova senha e navegar para a tela de login
         alert("Senha alterada com sucesso!");
-        navigate('/'); // Ex: Redireciona para a home ou login
+        navigate('/login');
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-                {/* Ícone no topo */}
+
                 <div className="flex justify-left">
                      <div className="p-3 bg-gray-100 rounded-full">
                         <LockKeyhole className="w-6 h-6 text-gray-600" />
                     </div>
                 </div>
 
-                {/* Cabeçalho */}
                 <div className="text-left">
                     <h1 className="text-2xl font-bold">Crie uma nova senha</h1>
                     <p className="text-sm text-gray-600">
