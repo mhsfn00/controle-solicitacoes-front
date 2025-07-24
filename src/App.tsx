@@ -1,24 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage/HomePage.tsx'
-import DefenseRequestPage from './pages/DefenseRequestPage/DefenseRequestPage.tsx';
-import AcademicRegisterPage from './pages/AcademicRegisterPage/AcademicRegisterPage.tsx';
-import Navbar from './components/NavBar/NavBar.tsx';
-import ProfessorRegistryPage from './pages/ProfessorRegistryPage/ProfessorRegistryPage.tsx';
-import CourseRegistryPage from './pages/CourseRegistryPage/CourseRegistryPage.tsx';
-import ExternalMemberRegistryPage from './pages/ExternalMemberRegistryPage/ExternalMemberRegistryPage.tsx';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/NavBar/NavBar";
+import { routes } from "./routes";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/defenseRequest" element={<DefenseRequestPage />} />
-        <Route path="/professor" element={<ProfessorRegistryPage />} />
-        <Route path="/aluno" element={<AcademicRegisterPage />} />
-        <Route path="/course" element={<CourseRegistryPage />} />
-        <Route path="/external-member" element={<ExternalMemberRegistryPage />} />
+        {Object.entries(routes).map(
+          ([key, item]) =>
+            !!item.element && (
+              <Route key={key} path={item.path} element={item.element} />
+            )
+        )}
       </Routes>
     </Router>
   );
