@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
-import {
-  BookOpenCheckIcon,
-  CalendarIcon,
-  GraduationCapIcon,
-  LogOutIcon,
-  UserRoundIcon,
-  UserRoundPenIcon,
-  UserRoundPlusIcon,
-} from "lucide-react";
+import { LogOutIcon } from "lucide-react";
+import { routes } from "@/routes";
+
+const links = [
+  routes.home,
+  routes.defenseRequest,
+  routes.professor,
+  routes.aluno,
+  routes.course,
+  routes.externalMember,
+];
 
 const Navbar: React.FC = () => (
   <nav className={styles.navbarContainer}>
@@ -16,51 +18,13 @@ const Navbar: React.FC = () => (
       <img src="src/assets/icons/logo.svg" alt="logo" />
       SPPCU
     </div>
-    <Link className={styles.navButton} to="/">
-      <CalendarIcon />
-      Início
-    </Link>
-    <Link className={styles.navButton} to="/defenseRequest">
-      <GraduationCapIcon />
-      Solicitar de Defesa
-    </Link>
-    {/* <Link className={styles.navButton} to="/professor">
-      <ScrollTextIcon />
-      Solicitar Exame
-    </Link> */}
-    {/* <Link className={styles.navButton} to="/professor">
-      <TableCellsMergeIcon />
-      Visualizar Status
-    </Link> */}
-    {/* <Link className={styles.navButton} to="/professor">
-      <UserRoundPenIcon />
-      Editar Perfil
-    </Link> */}
-    <Link className={styles.navButton} to="/professor">
-      <UserRoundPenIcon />
-      Cadastrar Professor
-    </Link>
-    <Link className={styles.navButton} to="/aluno">
-      <UserRoundIcon />
-      Cadastrar Aluno
-    </Link>
-    <Link className={styles.navButton} to="/course">
-      <BookOpenCheckIcon />
-      Cadastrar Curso
-    </Link>
-    <Link className={styles.navButton} to="/external-member">
-      <UserRoundPlusIcon />
-      Registro de Membro Externo
-    </Link>
-    <Link className={styles.navButton} to="/login">
-      Entrar
-    </Link>
-    <Link className={styles.navButton} to="/forgot-password">
-      Esqueceu a senha
-    </Link>
-    <Link className={styles.navButton} to="/reset-password">
-      Alterar senha
-    </Link>
+    {links.map((item) => (
+      <Link className={styles.navButton} to={item.path}>
+        {item.icon}
+        {item.label}
+      </Link>
+    ))}
+
     <Link className={`${styles.navButton} ${styles.navButtonRed}`} to="/">
       <LogOutIcon />
       Sair
