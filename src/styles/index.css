@@ -12,7 +12,8 @@ body {
 
 .pageContainer {
     background-color: var(--background-primary);
-    margin-left: 13vw;
+    /* margin-left: 13vw; */
+    margin-left: 255px;
     width: 87vw;
     height: 100vh;
     display: flex;
