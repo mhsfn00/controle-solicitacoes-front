@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "../../lib/utils"; // Certifique-se de que este caminho está correto para o seu `utils.ts`
+import { cn } from "../../lib/utils";
 
 const Table = React.forwardRef<
   HTMLTableElement,
