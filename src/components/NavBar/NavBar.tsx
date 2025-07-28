@@ -10,7 +10,8 @@ const links = [
   routes.aluno,
   routes.course,
   routes.externalMember,
-  routes.academicsRequests
+  routes.academicsRequests,
+  routes.HomeScreenStudent
 ];
 
 const Navbar: React.FC = () => (

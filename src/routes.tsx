@@ -9,7 +9,8 @@ import {
   LoginRequestPage,
   ForgotPasswordPage,
   ResetPasswordPage,
-  AcademicsRequestsPage
+  AcademicsRequestsPage,
+  HomeScreenStudentPage
 } from "./pages";
 import {
   CalendarIcon,
@@ -102,5 +103,10 @@ export const routes: RoutesProps = {
     label: "Requisições de Alunos", 
     icon: <GraduationCapIcon />,
     element: <AcademicsRequestsPage /> 
+  },
+  HomeScreenStudent: { 
+    path: "/tela-principal-alunos", 
+    label: "Tela Principal Alunos", 
+    element: <HomeScreenStudentPage /> 
   }
 };
