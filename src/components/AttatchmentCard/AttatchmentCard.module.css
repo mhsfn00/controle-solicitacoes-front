@@ -1,0 +1,31 @@
+.icon {
+    background-color: var(--muted);
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
+
+.subTitle {
+    font-size: 12px;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.fileContainer {
+    padding: 8px;
+    border: solid 1px #E7E7E7;
+    border-radius: 12px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
