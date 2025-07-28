@@ -9,7 +9,8 @@ import {
   LoginRequestPage,
   ForgotPasswordPage,
   ResetPasswordPage,
-  DefenseApprovalPage
+  DefenseApprovalPage,
+  AcademicsRequestsPage
 } from "./pages";
 import {
   CalendarIcon,
@@ -101,5 +102,11 @@ export const routes: RoutesProps = {
     path: "/", 
     label: "Editar Perfil", 
     icon: <UserRoundPenIcon /> 
+  },
+  academicsRequests: { 
+    path: "/requisicoes-alunos", 
+    label: "Requisições de Alunos", 
+    icon: <GraduationCapIcon />,
+    element: <AcademicsRequestsPage /> 
   }
 };

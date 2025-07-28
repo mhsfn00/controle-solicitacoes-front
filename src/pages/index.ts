@@ -8,4 +8,4 @@ export  {default as LoginRequestPage} from './LoginRequestPage/LoginRequestPage'
 export  {default as ForgotPasswordPage} from './ForgotPasswordPage/ForgotPasswordPage';
 export  {default as ResetPasswordPage} from './ResetPasswordPage/ResetPasswordPage';
 export  {default as DefenseApprovalPage} from './DefenseApprovalPage/DefenseApprovalPage';
-
+export  {default as AcademicsRequestsPage} from './AcademicsRequestsPage/AcademicsRequestsPage';
