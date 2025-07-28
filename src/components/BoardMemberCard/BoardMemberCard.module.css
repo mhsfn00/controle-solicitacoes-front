@@ -1,20 +1,20 @@
 .title {
-    width: 15%;
+    width: 20%;
     text-transform: capitalize;
 }
 
 .name {
-    width: 30%;
+    width: 35%;
     text-transform: capitalize;
 }
 
 .institution {
-    width: 55%;
+    width: 45%;
 }
 
 .secondary {
     font-size: 13px;
-    font-weight: 400;
+    font-weight: light;
 }
 
 .primary {

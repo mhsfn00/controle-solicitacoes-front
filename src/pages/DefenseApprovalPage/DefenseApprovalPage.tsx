@@ -16,36 +16,34 @@ const DefenseApprovalPage: React.FC<Props> = ({ data = mockData }) => {
   return (
     <div className="pageContainer">
       <div className="pageContent">
-        <Card className="max-w-4xl mx-auto p-6 space-y-6">
+        <Card className="max-w-4xl mx-auto p-6 space-y-6 font-light">
           {/* Header Info */}
           <section>
             <AcademicBadge title={"mestrando"}/>
             <h2 className="text-2xl font-bold mt-2">{data.student}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mt-6">
-              <div>
-                <p>Modalidade de Defesa</p>
-                <p>{data.defenseModality}</p>
-              </div>
+            <div className="flex-col gap-4 text-sm mt-6">
+                <p className="font-medium">Modalidade de Defesa</p>
+                <p className="capitalize">{data.defenseModality}</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mt-4">
               <div>
-                <p>Data</p>
+                <p className="font-medium">Data</p>
                 <p>{data.date.toISOString().split("T")[0]}</p>
               </div>
               <div>
-                <p>Horário</p>
+                <p className="font-medium">Horário</p>
                 <p>{data.time}</p>
               </div>
               <div>
-                <p>Bloco</p>
+                <p className="font-medium">Bloco</p>
                 <p>{data.block}</p>
               </div>
               <div>
-                <p>Sala</p>
+                <p className="font-medium">Sala</p>
                 <p>{data.room}</p>
               </div>
               <div>
-                <p>Link</p>
+                <p className="font-medium">Link</p>
                 <p>{data.link}</p>
               </div>
             </div>
@@ -64,14 +62,22 @@ const DefenseApprovalPage: React.FC<Props> = ({ data = mockData }) => {
             </CardContent>
           </Card>
 
-          {/* Título da Dissertação */}
+          {/* Informações da Dissertação */}
           <Card>
-            <CardHeader><CardTitle>Título da Dissertação</CardTitle></CardHeader>
-            <CardContent>
-              <p className="mb-2">{data.thesisTitle}</p>
+            <CardContent className="text-sm">
+              <div className="mb-5">
+                <p className="font-medium my-1 text-base">Título da Dissertação</p>
+                <p>{data.thesisTitle}</p>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                <div><strong>Orientador(a)</strong>{data.advisor}</div>
-                <div><strong>1º Coorientador(a)</strong>{data.coAdvisor1}</div>
+                <div className="flex-col">
+                  <p className="font-medium my-1">Orientador(a)</p>
+                  <p>{data.advisor}</p>
+                </div>
+                <div className="flex-col">
+                  <p className="font-medium my-1">1º Coorientador(a)</p>
+                  <p>{data.coAdvisor1}</p>
+                </div>
               </div>
             </CardContent>
           </Card>
