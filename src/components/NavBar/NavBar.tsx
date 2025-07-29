@@ -10,6 +10,7 @@ const links = [
   routes.aluno,
   routes.course,
   routes.externalMember,
+  routes.defenseApproval,
   routes.academicsRequests
 ];
 

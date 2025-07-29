@@ -9,6 +9,7 @@ import {
   LoginRequestPage,
   ForgotPasswordPage,
   ResetPasswordPage,
+  DefenseApprovalPage,
   AcademicsRequestsPage
 } from "./pages";
 import {
@@ -69,6 +70,11 @@ export const routes: RoutesProps = {
     label: "Registro de Membro Externo",
     element: <ExternalMemberRegistryPage />,
     icon: <UserRoundPlusIcon />,
+  },
+  defenseApproval: {
+    path: "/defenseApproval",
+    label: "Requisição de Defesa",
+    element: <DefenseApprovalPage />,
   },
   login: {
     path: "/login",

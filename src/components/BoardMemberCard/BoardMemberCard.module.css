@@ -1,0 +1,29 @@
+.title {
+    width: 20%;
+    text-transform: capitalize;
+}
+
+.name {
+    width: 35%;
+    text-transform: capitalize;
+}
+
+.institution {
+    width: 45%;
+}
+
+.secondary {
+    font-size: 13px;
+    font-weight: light;
+}
+
+.primary {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    padding: 10px 0px;
+}

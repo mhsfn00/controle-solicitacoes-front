@@ -1,0 +1,10 @@
+.container {
+    background-color: #A3FD55;
+    color: #3C8100;
+    font-weight: 500;
+    display: inline-block;
+    border-radius: 12px;
+    padding: 0px 15px;
+    text-transform: capitalize;
+    font-size: 14px;
+}
