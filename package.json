@@ -17,6 +17,7 @@
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.1.11",
+    "card": "^2.5.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -28,6 +29,7 @@
     "react-hook-form": "^7.58.1",
     "react-resizable-panels": "^3.0.3",
     "react-router-dom": "^7.6.2",
+    "shadcn": "^2.9.3",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
     "zod": "^3.25.67"
