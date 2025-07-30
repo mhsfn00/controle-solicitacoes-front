@@ -11,7 +11,8 @@ const links = [
   routes.course,
   routes.externalMember,
   routes.academicsRequests,
-  routes.HomeScreenStudent
+  routes.HomeScreenStudent,
+  routes.defenseApproval
 ];
 
 const Navbar: React.FC = () => (

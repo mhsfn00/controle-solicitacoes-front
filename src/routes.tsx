@@ -10,7 +10,8 @@ import {
   ForgotPasswordPage,
   ResetPasswordPage,
   AcademicsRequestsPage,
-  HomeScreenStudentPage
+  HomeScreenStudentPage,
+  DefenseApprovalPage
 } from "./pages";
 import {
   CalendarIcon,
@@ -70,6 +71,11 @@ export const routes: RoutesProps = {
     label: "Registro de Membro Externo",
     element: <ExternalMemberRegistryPage />,
     icon: <UserRoundPlusIcon />,
+  },
+  defenseApproval: {
+    path: "/defenseApproval",
+    label: "Requisição de Defesa",
+    element: <DefenseApprovalPage />,
   },
   login: {
     path: "/login",
