@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "sexo": "echo '🔥 Preparando clima...' && npm run dev"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
