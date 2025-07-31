@@ -9,3 +9,4 @@ export  {default as ForgotPasswordPage} from './ForgotPasswordPage/ForgotPasswor
 export  {default as ResetPasswordPage} from './ResetPasswordPage/ResetPasswordPage';
 export  {default as DefenseApprovalPage} from './DefenseApprovalPage/DefenseApprovalPage';
 export  {default as AcademicsRequestsPage} from './AcademicsRequestsPage/AcademicsRequestsPage';
+export  {default as HomeScreenStudentPage} from './HomeScreenStudentPage/HomeScreenStudentPage';

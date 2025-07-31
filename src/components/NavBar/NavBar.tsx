@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
-import { LogOutIcon } from "lucide-react";
-import { routes } from "@/routes";
-import { useAuth } from "@/auth/AuthContext";
-import { Button } from "../ui/button";
+import { Link } from 'react-router-dom';
+import { LogOutIcon } from 'lucide-react';
+import { routes } from '@/routes';
+import { useAuth } from '@/auth/AuthContext';
+import { Button } from '../ui/button';
 
 const Navbar: React.FC = () => {
-  const {logout, hasRole} = useAuth();
-  const links = Object.values(routes.app).filter(link => !link.role || hasRole(link.role));
+  const { logout, hasRole } = useAuth();
+  const links = Object.values(routes.app).filter(
+    (link) => !link.role || hasRole(link.role)
+  );
 
-  return(
+  return (
     <nav className="h-screen w-64 flex flex-col sticky left-0 top-0 bg-secondary p-4">
       <div className="flex gap-2 items-center font-semibold my-5">
         <img src="src/assets/icons/logo.svg" alt="logo" />
@@ -27,13 +29,17 @@ const Navbar: React.FC = () => {
           ))}
         </div>
 
-        <Button onClick={logout} variant="destructive" className="flex justify-start">
+        <Button
+          onClick={logout}
+          variant="destructive"
+          className="flex justify-start"
+        >
           <LogOutIcon />
           Sair
         </Button>
       </div>
     </nav>
-  )
+  );
 };
 
 export default Navbar;

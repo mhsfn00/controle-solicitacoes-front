@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import type { ReactElement } from 'react';
 import {
   AcademicRegisterPage,
   CourseRegistryPage,
@@ -9,9 +9,9 @@ import {
   LoginRequestPage,
   ForgotPasswordPage,
   ResetPasswordPage,
+  AcademicsRequestsPage,
   DefenseApprovalPage,
-  AcademicsRequestsPage
-} from "./pages";
+} from './pages';
 import {
   CalendarIcon,
   GraduationCapIcon,
@@ -54,7 +54,7 @@ export const routes: RoutesProps = {
       icon: <CalendarIcon />,
     },
     defenseRequest: {
-      path: '/defenseRequest',
+      path: '/defesa',
       label: 'Solicitar Defesa',
       element: <DefenseRequestPage />,
       icon: <GraduationCapIcon />,
@@ -75,14 +75,14 @@ export const routes: RoutesProps = {
       role: 'secretaria',
     },
     course: {
-      path: '/course',
+      path: '/curso',
       label: 'Cadastrar Curso',
       element: <CourseRegistryPage />,
       icon: <BookOpenCheckIcon />,
       role: 'secretaria',
     },
     externalMember: {
-      path: '/external-member',
+      path: '/membro-externo',
       label: 'Cadastrar Membro Externo',
       element: <ExternalMemberRegistryPage />,
       icon: <UserRoundPlusIcon />,
@@ -117,7 +117,7 @@ export const routes: RoutesProps = {
       role: 'aluno',
     },
     editPerfil: {
-      path: '/profile',
+      path: '/perfil',
       label: 'Editar Perfil',
       icon: <UserRoundPenIcon />,
       element: <AcademicProfilePage />,
@@ -130,11 +130,11 @@ export const routes: RoutesProps = {
       element: <LoginRequestPage />,
     },
     forgotPassword: {
-      path: '/forgotPassword',
+      path: '/forgot-password',
       element: <ForgotPasswordPage />,
     },
     resetPassword: {
-      path: '/resetPassword',
+      path: '/reset-password',
       element: <ResetPasswordPage />,
     },
   },
