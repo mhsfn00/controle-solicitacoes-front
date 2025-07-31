@@ -3,14 +3,11 @@ import { PageTitle } from "@/components/PageTitle/PageTitle";
 
 const CourseRegistryPage: React.FC = () => {
    return (
-
-        <div className="pageContainer">
-            <div className="pageContent">
-                <PageTitle showShield={true} title="Cadastro de Linha de Pesquisa"/>
-                <CourseRegistryForm/>
-            </div>
-        </div>
-   ) 
+     <div className="max-w-3xl mx-auto">
+       <PageTitle showShield={true} title="Cadastro de Linha de Pesquisa" />
+       <CourseRegistryForm />
+     </div>
+   ); 
 }
 
 

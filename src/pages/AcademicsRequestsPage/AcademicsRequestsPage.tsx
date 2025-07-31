@@ -2,9 +2,9 @@ import AcademicsRequestsList from "../../components/AcademicsRequestsList/Academ
 
 const AcademicsRequestsPage: React.FC = () => {
     return (
-        <div className="pageContainer">
-            <AcademicsRequestsList />
-        </div>
-    )
+      <div className="w-full max-w-3xl mx-auto">
+        <AcademicsRequestsList />
+      </div>
+    );
 }
 export default AcademicsRequestsPage; 

@@ -4,13 +4,10 @@ import { PageTitle } from "@/components/PageTitle/PageTitle.tsx";
 const AcademicRegisterPage: React.FC = () => 
 {
     return (
-        
-        <div className="pageContainer">
-            <div className="pageContent">
-                <PageTitle showShield={false} title="Cadastro de Aluno" />
-                <PersonRegisterForm />
-            </div>
-        </div>
-    )
+      <div className="w-full max-w-3xl mx-auto">
+        <PageTitle showShield={false} title="Cadastro de Aluno" />
+        <PersonRegisterForm />
+      </div>
+    );
 }
 export default AcademicRegisterPage; 

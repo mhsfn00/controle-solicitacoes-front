@@ -7,11 +7,14 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import React, { useState } from "react";
 import { Eye, EyeOff } from 'lucide-react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/auth/AuthContext";
 
 const LoginRequestForm: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const { login, loading } = useAuth();
+    const navigate = useNavigate();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -23,8 +26,10 @@ const LoginRequestForm: React.FC = () => {
 
 
     const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log("Dados do formulário:", values);
-        // Lógica de autenticação
+        login(values.usuario, values.senha)
+        .then(() => {
+            navigate("/");
+        });
     };
 
     return (
@@ -97,7 +102,7 @@ const LoginRequestForm: React.FC = () => {
                             </Link>
                         </div>
 
-                        <Button type="submit" className={cn("w-full py-6")}>
+                        <Button type="submit" className={cn("w-full py-6")} disabled={loading}>
                             Entrar
                         </Button>
                     </form>
