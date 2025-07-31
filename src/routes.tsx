@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import type { ReactElement } from 'react';
 import {
   AcademicRegisterPage,
   CourseRegistryPage,
@@ -10,9 +10,8 @@ import {
   ForgotPasswordPage,
   ResetPasswordPage,
   AcademicsRequestsPage,
-  HomeScreenStudentPage,
   DefenseApprovalPage,
-} from "./pages";
+} from './pages';
 import {
   CalendarIcon,
   GraduationCapIcon,
@@ -22,97 +21,122 @@ import {
   UserRoundPlusIcon,
   TableCellsMergeIcon,
   ScrollTextIcon,
-} from "lucide-react";
+  SheetIcon,
+} from 'lucide-react';
+import type { Role } from './auth/types';
+import AcademicProfilePage from './pages/AcademicProfilePage';
+import DefenseStatusPage from './pages/DefenseStatusPage';
 
 interface RouteConfig {
   path: string;
   label?: string;
   element?: ReactElement;
   icon?: ReactElement;
+  role?: Role | Role[];
+  hidden?: boolean;
 }
 
 interface RoutesProps {
-  [key: string]: RouteConfig;
+  app: {
+    [key: string]: RouteConfig;
+  };
+  auth: {
+    [key: string]: Omit<RouteConfig, 'role'>;
+  };
 }
 
 export const routes: RoutesProps = {
-  home: {
-    path: "/",
-    label: "Início",
-    element: <HomePage />,
-    icon: <CalendarIcon />,
+  app: {
+    home: {
+      path: '/',
+      label: 'Início',
+      element: <HomePage />,
+      icon: <CalendarIcon />,
+      role: 'aluno',
+    },
+    defenseRequest: {
+      path: '/defesa',
+      label: 'Solicitar Defesa',
+      element: <DefenseRequestPage />,
+      icon: <GraduationCapIcon />,
+      role: 'aluno',
+    },
+    aluno: {
+      path: '/aluno',
+      label: 'Cadastrar Acadêmico',
+      element: <AcademicRegisterPage />,
+      icon: <UserRoundIcon />,
+      role: 'secretaria',
+    },
+    professor: {
+      path: '/professor',
+      label: 'Cadastrar Docente',
+      element: <ProfessorRegistryPage />,
+      icon: <UserRoundPenIcon />,
+      role: 'secretaria',
+    },
+    course: {
+      path: '/curso',
+      label: 'Cadastrar Curso',
+      element: <CourseRegistryPage />,
+      icon: <BookOpenCheckIcon />,
+      role: 'secretaria',
+    },
+    externalMember: {
+      path: '/membro-externo',
+      label: 'Cadastrar Membro Externo',
+      element: <ExternalMemberRegistryPage />,
+      icon: <UserRoundPlusIcon />,
+      role: 'secretaria',
+    },
+    academicsRequests: {
+      path: '/requisicoes-alunos',
+      label: 'Solicitações',
+      icon: <SheetIcon />,
+      element: <AcademicsRequestsPage />,
+      role: ['secretaria', 'professor'],
+    },
+
+    defenseApproval: {
+      path: '/requisicoes-alunos/:id',
+      label: 'Requisição de Defesa',
+      element: <DefenseApprovalPage />,
+      role: ['secretaria', 'professor'],
+      hidden: true,
+    },
+    requestExam: {
+      path: '/',
+      label: 'Solicitar Exame',
+      icon: <ScrollTextIcon />,
+      role: 'aluno',
+    },
+    viewStatus: {
+      path: '/status-defesa',
+      label: 'Visualizar Status',
+      icon: <TableCellsMergeIcon />,
+      element: <DefenseStatusPage />,
+      role: 'aluno',
+    },
+    editPerfil: {
+      path: '/perfil',
+      label: 'Editar Perfil',
+      icon: <UserRoundPenIcon />,
+      element: <AcademicProfilePage />,
+      role: 'aluno',
+    },
   },
-  defenseRequest: {
-    path: "/defenseRequest",
-    label: "Solicitar Defesa",
-    element: <DefenseRequestPage />,
-    icon: <GraduationCapIcon />,
-  },
-  professor: {
-    path: "/professor",
-    label: "Cadastrar Professor",
-    element: <ProfessorRegistryPage />,
-    icon: <UserRoundPenIcon />,
-  },
-  aluno: {
-    path: "/student",
-    label: "Cadastrar Aluno",
-    element: <AcademicRegisterPage />,
-    icon: <UserRoundIcon />,
-  },
-  course: {
-    path: "/course",
-    label: "Cadastrar Curso",
-    element: <CourseRegistryPage />,
-    icon: <BookOpenCheckIcon />,
-  },
-  externalMember: {
-    path: "/external-member",
-    label: "Registro de Membro Externo",
-    element: <ExternalMemberRegistryPage />,
-    icon: <UserRoundPlusIcon />,
-  },
-  defenseApproval: {
-    path: "/defense-approval",
-    label: "Requisição de Defesa",
-    element: <DefenseApprovalPage />,
-  },
-  login: {
-    path: "/login",
-    element: <LoginRequestPage />,
-  },
-  forgotPassword: {
-    path: "/forgot-password",
-    element: <ForgotPasswordPage />,
-  },
-  resetPassword: {
-    path: "/reset-password",
-    element: <ResetPasswordPage />,
-  },
-  requestExam: {
-    path: "/",
-    label: "Solicitar Exame",
-    icon: <ScrollTextIcon />,
-  },
-  viewStatus: {
-    path: "/",
-    label: "Visualizar Status",
-    icon: <TableCellsMergeIcon />,
-  },
-  editPerfil: {
-    path: "/",
-    label: "Editar Perfil",
-    icon: <UserRoundPenIcon />,
-  },
-  academicsRequests: {
-    path: "/students-request",
-    label: "Requisições de Alunos",
-    icon: <GraduationCapIcon />,
-    element: <AcademicsRequestsPage />,
-  },
-  HomeScreenStudent: {
-    path: "/students-main-page",
-    label: "Tela Principal Alunos",
-    element: <HomeScreenStudentPage />,
+  auth: {
+    login: {
+      path: '/login',
+      element: <LoginRequestPage />,
+    },
+    forgotPassword: {
+      path: '/forgot-password',
+      element: <ForgotPasswordPage />,
+    },
+    resetPassword: {
+      path: '/reset-password',
+      element: <ResetPasswordPage />,
+    },
   },
 };

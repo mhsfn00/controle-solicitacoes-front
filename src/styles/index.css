@@ -10,23 +10,6 @@ body {
     overflow-x: hidden;
 }
 
-.pageContainer {
-    background-color: var(--background-primary);
-    margin-left: 255px;
-    width: 87vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pageContent {
-    display: flex;
-    flex-direction: column;
-    height: 94vh;
-    width: 40%;
-}
-
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);

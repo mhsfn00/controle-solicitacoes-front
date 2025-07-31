@@ -3,14 +3,11 @@ import { ProfessorRegistryForm } from "@/components/ProfessorRegistryForm/Profes
 
 const ProfessorRegistryPage: React.FC = () => {
    return (
-
-        <div className="pageContainer">
-            <div className="pageContent">
-                <PageTitle showShield={false} title="Cadastro de Docente"/>
-                <ProfessorRegistryForm />
-            </div>
-        </div>
-   ) 
+     <div className="max-w-3xl mx-auto">
+       <PageTitle showShield={false} title="Cadastro de Docente" />
+       <ProfessorRegistryForm />
+     </div>
+   ); 
 }
 
 

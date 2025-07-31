@@ -3,11 +3,9 @@ import DefenseRequestForm from "../../components/DefenseRequestForm/DefenseReque
 const DefenseRequestPage: React.FC = () => 
 {
     return (
-        <div className="pageContainer">
-            <div className="pageContent">
-                <DefenseRequestForm/>
-            </div>
-        </div>
-    )
+      <div className="w-full max-w-3xl mx-auto">
+        <DefenseRequestForm />
+      </div>
+    );
 }
 export default DefenseRequestPage; 
