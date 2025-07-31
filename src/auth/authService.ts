@@ -11,18 +11,19 @@ const mockedUser: User = {
 
 const professor = {
     ...mockedUser,
-    email: "ra123456@uem.br",
+    email: "prof@uem.br",
     professor: {}
 }
 
 const secretaria = {
     ...mockedUser,
-    email: "ra123457@uem.br",
+    email: "sec@uem.br",
     secretaria: {}
 }
 
 const aluno = {
     ...mockedUser,
+    email: "aluno@uem.br",
     aluno: {}
 }
 

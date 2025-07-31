@@ -55,7 +55,7 @@ export function DefenseRequestForm() {
 
   const navigate = useNavigate();
   const selectedModality = form.watch("defenseModality");
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(2);
 
 
   async function validateFirstStep() { 
