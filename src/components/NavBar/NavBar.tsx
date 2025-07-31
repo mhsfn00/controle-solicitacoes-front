@@ -7,7 +7,7 @@ import { Button } from '../ui/button';
 const Navbar: React.FC = () => {
   const { logout, hasRole } = useAuth();
   const links = Object.values(routes.app).filter(
-    (link) => !link.role || hasRole(link.role)
+    (link) => !link.hidden && (!link.role || hasRole(link.role))
   );
 
   return (

@@ -52,6 +52,7 @@ export const routes: RoutesProps = {
       label: 'Início',
       element: <HomePage />,
       icon: <CalendarIcon />,
+      role: 'aluno',
     },
     defenseRequest: {
       path: '/defesa',

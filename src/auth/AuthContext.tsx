@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useCallback, useContext } from 'react';
 import type { Role, User } from './types';
 
 import { useMutation } from '@tanstack/react-query';
@@ -36,13 +36,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const handleLogin = async (username: string, password: string) => {
     return await login({ username, password });
   };
-  const hasRole = (role: Role | Role[]) => {
-    if (!data) return false;
-    if (Array.isArray(role)) {
-      return role.some((r) => data[r] !== undefined);
-    }
-    return data[role] !== undefined;
-  };
+
+  const hasRole = useCallback(
+    (role: Role | Role[]) => {
+      if (!data) return false;
+      if (Array.isArray(role)) {
+        return role.some((r) => data[r] !== undefined);
+      }
+      return data[role] !== undefined;
+    },
+    [data]
+  );
 
   return (
     <AuthContext.Provider
