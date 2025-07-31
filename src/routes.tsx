@@ -11,7 +11,7 @@ import {
   ResetPasswordPage,
   AcademicsRequestsPage,
   HomeScreenStudentPage,
-  DefenseApprovalPage
+  DefenseApprovalPage,
 } from "./pages";
 import {
   CalendarIcon,
@@ -55,7 +55,7 @@ export const routes: RoutesProps = {
     icon: <UserRoundPenIcon />,
   },
   aluno: {
-    path: "/aluno",
+    path: "/student",
     label: "Cadastrar Aluno",
     element: <AcademicRegisterPage />,
     icon: <UserRoundIcon />,
@@ -73,21 +73,21 @@ export const routes: RoutesProps = {
     icon: <UserRoundPlusIcon />,
   },
   defenseApproval: {
-    path: "/defenseApproval",
+    path: "/defense-approval",
     label: "Requisição de Defesa",
     element: <DefenseApprovalPage />,
   },
   login: {
     path: "/login",
-    element: <LoginRequestPage />
+    element: <LoginRequestPage />,
   },
   forgotPassword: {
-    path: "/forgotPassword",
-    element: <ForgotPasswordPage />
+    path: "/forgot-password",
+    element: <ForgotPasswordPage />,
   },
   resetPassword: {
-    path: "/resetPassword",
-    element: <ResetPasswordPage />
+    path: "/reset-password",
+    element: <ResetPasswordPage />,
   },
   requestExam: {
     path: "/",
@@ -99,20 +99,20 @@ export const routes: RoutesProps = {
     label: "Visualizar Status",
     icon: <TableCellsMergeIcon />,
   },
-  editPerfil: { 
-    path: "/", 
-    label: "Editar Perfil", 
-    icon: <UserRoundPenIcon /> 
+  editPerfil: {
+    path: "/",
+    label: "Editar Perfil",
+    icon: <UserRoundPenIcon />,
   },
-  academicsRequests: { 
-    path: "/requisicoes-alunos", 
-    label: "Requisições de Alunos", 
+  academicsRequests: {
+    path: "/students-request",
+    label: "Requisições de Alunos",
     icon: <GraduationCapIcon />,
-    element: <AcademicsRequestsPage /> 
+    element: <AcademicsRequestsPage />,
   },
-  HomeScreenStudent: { 
-    path: "/tela-principal-alunos", 
-    label: "Tela Principal Alunos", 
-    element: <HomeScreenStudentPage /> 
-  }
+  HomeScreenStudent: {
+    path: "/students-main-page",
+    label: "Tela Principal Alunos",
+    element: <HomeScreenStudentPage />,
+  },
 };
